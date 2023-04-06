@@ -1,0 +1,1 @@
+web: sh -c 'cd ./test_project/ && exec gunicorn test_project.wsgi --log-file -'
