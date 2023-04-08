@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% block content %}
+  <form action="">
+    <div class="mb-3">
+      <p className="content">
+        Register now
+        and start enjoying! <br />
+        Or if you already have an account, please <a href="{% url 'loginaccount' %}">Login</a>
+        </p>
+    </div>
+    <div class="mb-3">   
+    <button type="button" class="btn btn-primary" target="_blank">
+      <a style="color: #ffffff" href="https://t.me/RegisterChatBot" target="_blank">Sign Up via Telegram</a>
+    </button>
+    </div> 
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto">
+        
+        {% if user.is_authenticated %}
+          <p>Auth</p>
+        {% endif %}
+      </div>
+    </div>
+
+  </form>
+{% endblock content %} 

@@ -7,6 +7,7 @@ gunicorn
 python-dotenv
 pydotplus
 psycopg2
-psycopg2-binary==2.8.6
+psycopg2-binary
 whitenoise
 secret-key-generator
+djangorestframework
