@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from accounts.models import File
 
 
 User = get_user_model()
@@ -17,3 +18,12 @@ class RegisterSerializer(serializers.HyperlinkedModelSerializer):
         
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+    
+
+
+
+class FileSerializer(serializers.ModelSerializer):
+    user_id = serializers.SlugRelatedField(queryset = User.objects.all(), slug_field='tg_id')
+    class Meta:
+        model = File
+        fields = "__all__"

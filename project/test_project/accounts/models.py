@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from .abstract.models import AbstractManager, AbstractModel
+import uuid
 
 
 class UserManager(BaseUserManager, AbstractManager):
@@ -42,6 +43,9 @@ class UserManager(BaseUserManager, AbstractManager):
         user.save(using=self._db)
 
         return user
+    
+
+
 
 
 class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
@@ -67,3 +71,29 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
     @property
     def name(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class FileManager(models.Manager):
+
+
+    def get_object_by_public_id(self):
+        try:
+            instance = File.objects.raw('SELECT f.* FROM public.accounts_file as f inner join public.accounts_user as u on f.user_id_id = u.id')[0]
+            return instance
+        except (ObjectDoesNotExist, ValueError, TypeError):
+            return Http404
+        
+    
+
+# model for user profile photos
+class File(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    file = models.FileField(blank=False, null=False)
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE, default=None)
+
+    objects = FileManager()
+
+    def __str__(self):
+        return self.file.name
+
+    

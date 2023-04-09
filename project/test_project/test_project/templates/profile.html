@@ -2,12 +2,40 @@
 {% block content %}
   <form action="">
     <div class="mb-3">
-      <p className="content">
-        Profile
-        </p>
+      <h5>User Profile</h5>
     </div>
-    <div class="mb-3">   
-
+    <div class="mb-3"> 
+      <div class="mb-3">
+      {% if user.is_authenticated %}
+      <p>Welcome, {{ user.tg_first_name }}. Thanks for logging in.</p>
+      <img src="{{ file.file.url }}" class="rounded-circle" width="10%">
+    </br></div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th colspan="2" scope="col">Telegram User Info:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">ID</th>
+            <td>{{ user.tg_id }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Username: </th>
+            <td>{{ user.tg_user_name}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Firstname: </th>
+            <td>{{ user.tg_first_name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Lastname: </th>
+            <td>{{ user.tg_last_name }}</td>
+          </tr>
+        </tbody>
+      </table>
+      {% endif %}
     </div> 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto">

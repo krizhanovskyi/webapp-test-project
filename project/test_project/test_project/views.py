@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from accounts.models import File, FileManager, User
+
+
 
 
 def home(request):
@@ -8,4 +11,4 @@ def home(request):
 
 @login_required(login_url='loginaccount')
 def profile(request):
-        return render(request, 'profile.html')
+        return render(request, 'profile.html', {'file':File.objects.get_object_by_public_id()})
