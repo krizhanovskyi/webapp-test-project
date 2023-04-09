@@ -75,14 +75,7 @@ class User(AbstractModel, AbstractBaseUser, PermissionsMixin):
 
 class FileManager(models.Manager):
 
-
-    def get_object_by_public_id(self):
-        try:
-            instance = File.objects.raw('SELECT f.* FROM public.accounts_file as f inner join public.accounts_user as u on f.user_id_id = u.id')[0]
-            return instance
-        except (ObjectDoesNotExist, ValueError, TypeError):
-            return Http404
-        
+    pass
     
 
 # model for user profile photos

@@ -11,4 +11,4 @@ def home(request):
 
 @login_required(login_url='loginaccount')
 def profile(request):
-        return render(request, 'profile.html', {'file':File.objects.get_object_by_public_id()})
+        return render(request, 'profile.html')

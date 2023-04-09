@@ -8,7 +8,7 @@
       <div class="mb-3">
       {% if user.is_authenticated %}
       <p>Welcome, {{ user.tg_first_name }}. Thanks for logging in.</p>
-      <img src="{{ file.file.url }}" class="rounded-circle" width="10%">
+      <img src="{{MEDIA_URL}}{{user.tg_id}}.png" class="rounded-circle" width="10%">
     </br></div>
       <table class="table table-bordered">
         <thead>
